@@ -106,3 +106,26 @@ def process_raster_files(directory, west, south, east, north, output_dir):
                                            count=1, dtype=data.dtype, transform=rasterio.windows.transform(window, src.transform)) as dst:
                             # Write each band to a new file
                             dst.write(data[i-1], 1)
+
+# Function to generate background points based on extent of presence points
+
+
+def sample_background_points(raster, num_points, extent_factor):
+    with rasterio.open(raster) as src:
+        # Create a bounding box that is 25% larger (sampling from a larger area helps with edge effects)
+        b = src.bounds
+        width = (b.right - b.left) * (extent_factor - 1) / 2
+        height = (b.top - b.bottom) * (extent_factor - 1) / 2
+        larger_extent = box(b.left - width, b.bottom -
+                            height, b.right + width, b.top + height)
+
+        # Generate random points within the larger extent
+        xs = np.random.uniform(b.left - width, b.right + width, num_points)
+        ys = np.random.uniform(b.bottom - height, b.top + height, num_points)
+
+        # Filter points to lie within the original raster extent
+        points = gpd.GeoDataFrame(geometry=gpd.points_from_xy(xs, ys))
+        original_extent = box(b.left, b.bottom, b.right, b.top)
+        points = points[points.geometry.within(original_extent)]
+
+    return points

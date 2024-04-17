@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import geopandas as gpd
 import streamlit as st
 import pandas as pd
 import rasterio
@@ -9,6 +10,7 @@ import os
 
 from rasterio.windows import from_bounds
 from streamlit_folium import st_folium
+from shapely.geometry import box
 from rasterio.plot import show
 from io import BytesIO
 

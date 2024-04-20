@@ -10,7 +10,8 @@ Houses initial datasets used in analyses, including environmental variables and 
 ### inputs: 
 Contains configuration and input files for the models. These files guide the processing and are integral to the reproducibility of our analyses. This directory will also move to Google Cloud for better management.
 
-### outputs: Stores outputs from the models and scripts, such as processed data and visual results. The outputs are crucial for stakeholder presentations and further analysis. Migration to cloud storage is planned for this directory as well.
+### outputs: 
+Stores outputs from the models and scripts, such as processed data and visual results. The outputs are crucial for stakeholder presentations and further analysis. Migration to cloud storage is planned for this directory as well.
 
 ### presence_absence.ipynb: 
 Jupyter Notebook for initial data processing, analysis setup, and exploratory data visualization.

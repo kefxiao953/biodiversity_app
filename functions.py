@@ -74,27 +74,27 @@ def gbif_data(scientificName, max_pages=1):
 
     return pd.DataFrame(all_results)
 
-
-# cropping Bioclim Raster Files
-# Define the Colombian Amazon extent: latitude ~12°N and ~4°S and between longitudes ~67° and ~79°W.
-lat_extent = [12, -4.3]
-long_extent = [-79, -67]
-# Define the extent coordinates (west, south, east, north)
-# west, south, east, north = -79, -4.3, -67, 12
-west, south, east, north = -76, -4.5, -67, 5
-# Define the extent of the desert tortoise range
-west, south, east, north = -120, 24, -100, 45
-
 # Specify the directory containing the raster files
 input_directory = os.path.expanduser("~/data/bio/data/wc2")
 output_directory = os.path.expanduser(
     "~/data/bio/inputs/cropped_bioclim_tortoise")
 
 # Define geographic coordinates for the bounding box
+# example for tortoises
 west, south, east, north = -120, 24, -100, 45
 
 
 def process_raster_files(directory, west, south, east, north, output_dir):
+    """
+    Crop the bioclim raster files to an area of interest.
+
+    Args:
+    directory (str): Directory where bioclim rasters live.
+    west (numeric): Westernmost extent desired
+    south (numeric): Southmost extent desired
+    east (numeric): Easternmost extent desired
+    north (num): Northmost extent desired
+    """
     # Create the output directory if it does not exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -122,64 +122,64 @@ def process_raster_files(directory, west, south, east, north, output_dir):
                             dst.write(data[i-1], 1)
 
 
-def visualize_raster(file_path):
-    """
-    Visualizes a single-band raster file.
+# def visualize_raster(file_path):
+#     """
+#     Visualizes a single-band raster file.
 
-    Using the streamlit Matplotlib display
-    Args:
-    file_path (str): The path to the raster file.
-    """
-    with rasterio.open(file_path) as src:
-        # Read the first band
-        data = src.read(1)
+#     Using the streamlit Matplotlib display
+#     Args:
+#     file_path (str): The path to the raster file.
+#     """
+#     with rasterio.open(file_path) as src:
+#         # Read the first band
+#         data = src.read(1)
 
-        # Create a figure and axis
-        fig, ax = plt.subplots(figsize=(10, 10))
+#         # Create a figure and axis
+#         fig, ax = plt.subplots(figsize=(10, 10))
 
-        # Display the raster data in streamlit
-        show(data, ax=ax, transform=src.transform)
-        st.pyplot(fig)
+#         # Display the raster data in streamlit
+#         show(data, ax=ax, transform=src.transform)
+#         st.pyplot(fig)
 
 
-def create_map_with_rectangle(south, north, west, east):
-    """
-    Creates a Folium map centered at the midpoint of given bounds with a rectangle overlay.
+# def create_map_with_rectangle(south, north, west, east):
+#     """
+#     Creates a Folium map centered at the midpoint of given bounds with a rectangle overlay.
 
-    Args:
-    south (float): The southern boundary latitude.
-    north (float): The northern boundary latitude.
-    west (float): The western boundary longitude.
-    east (float): The eastern boundary longitude.
-    """
-    # Calculate the midpoint for the map center
-    midpoint = [(south + north) / 2, (west + east) / 2]
+#     Args:
+#     south (float): The southern boundary latitude.
+#     north (float): The northern boundary latitude.
+#     west (float): The western boundary longitude.
+#     east (float): The eastern boundary longitude.
+#     """
+#     # Calculate the midpoint for the map center
+#     midpoint = [(south + north) / 2, (west + east) / 2]
 
-    # Create a map centered at the midpoint
-    m = folium.Map(location=midpoint, zoom_start=4)
+#     # Create a map centered at the midpoint
+#     m = folium.Map(location=midpoint, zoom_start=4)
 
-    # Add a rectangle to the map
-    folium.Rectangle(
-        bounds=[[south, west], [north, east]],
-        color='red',
-        fill=True,
-        fill_color='red',
-        fill_opacity=0.2,
-    ).add_to(m)
+#     # Add a rectangle to the map
+#     folium.Rectangle(
+#         bounds=[[south, west], [north, east]],
+#         color='red',
+#         fill=True,
+#         fill_color='red',
+#         fill_opacity=0.2,
+#     ).add_to(m)
 
-    # Return the map object
-    return st_folium(m, width=725, height=500)
+#     # Return the map object
+#     return st_folium(m, width=725, height=500)
 
 
 def create_folium_map_with_raster_overlay(file_path):
     """
-    Creates a Folium map with a raster overlay from a specified raster file.
+    Creates a Folium map with a specified raster overlay.
 
     Args:
     file_path (str): Path to the raster file.
     """
     with rasterio.open(file_path) as src:
-        # Note the raster bounds
+        # Get the raster bounds
         bounds = src.bounds
 
         # Read the first band
@@ -221,15 +221,17 @@ def create_folium_map_with_raster_overlay(file_path):
 
 ################## PRESENCE & ABSENCE SAMPLING ##################
 
-# Function to generate background points based on extent of presence point
 def sample_background_points(raster, num_points, extent_factor):
+    """
+    Generates background points based on extent of presence points.
+    """
     with rasterio.open(raster) as src:
         # Create a bounding box that is 25% larger (sampling from a larger area helps with edge effects)
         b = src.bounds
         width = (b.right - b.left) * (extent_factor - 1) / 2
         height = (b.top - b.bottom) * (extent_factor - 1) / 2
-        larger_extent = box(b.left - width, b.bottom -
-                            height, b.right + width, b.top + height)
+        # larger_extent = box(b.left - width, b.bottom -
+        #                     height, b.right + width, b.top + height)
 
         # Generate random points within the larger extent
         xs = np.random.uniform(b.left - width, b.right + width, num_points)
@@ -259,7 +261,6 @@ def perform_model_evaluations(train_xs, train_y, target_xs, raster_info, st):
         'rf': RandomForestClassifier(),
         'et': ExtraTreesClassifier(),
         'xgb': XGBClassifier(),
-        # 'lgbm': LGBMClassifier()
     }
 
     # Model fitting and spatial range prediction
@@ -324,7 +325,7 @@ def create_folium_map(colormap):
         bounds = src.bounds
         crs = src.crs
 
-    # Assuming your map's initial focus point and zoom level
+    # Map's initial focus point and zoom level
     m = folium.Map(location=[35, -115], zoom_start=6)
 
     # Add the image overlay

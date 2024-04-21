@@ -326,7 +326,7 @@ def create_folium_map(colormap):
         crs = src.crs
 
     # Map's initial focus point and zoom level
-    m = folium.Map(location=[35, -115], zoom_start=6)
+    m = folium.Map(location=[35.5, -115.5], zoom_start=11)
 
     # Add the image overlay
     folium.raster_layers.ImageOverlay(
@@ -338,13 +338,20 @@ def create_folium_map(colormap):
         zindex=1,
     ).add_to(m)
 
-    folium.Marker(
-        location=[35, -115],
-        popup='Ivanpah Solar Field',
-        icon=folium.Icon(color='red')
-    ).add_to(m)
-
     # Add colormap
     colormap.add_to(m)
+
+    # Solar field polygon vertices
+    coordinates = [
+    [35.59, -115.50],
+    [35.599, -115.41],
+    [35.52, -115.48]
+    ]
+
+    # Create polygon and add it to the map
+    folium.vector_layers.Polygon(
+        locations=coordinates,  # List of coordinates
+        color='blue'          # Color of the polygon's border
+    ).add_to(m)
 
     return st_folium(m, width=725, height=500)

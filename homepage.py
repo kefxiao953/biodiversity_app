@@ -7,10 +7,10 @@ st.set_page_config(
     layout="wide"
 )
 
-st.header("Welcome to Biopraedico")
+st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-
-text = '''Predict a Sustainable Future.  
+st.subheader("Predict a Sustainable Future.")
+text = '''  
 Explore Earth's biodiversity data below. 
 '''
 st.markdown(text)

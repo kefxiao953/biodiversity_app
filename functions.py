@@ -332,6 +332,7 @@ def create_folium_map(colormap):
     folium.raster_layers.ImageOverlay(
         image='outputs/distr_averaged.png',
         bounds=[[bounds.bottom, bounds.left], [bounds.top, bounds.right]],
+        # bounds = mojave_bounds,
         opacity=0.6,
         interactive=True,
         cross_origin=False,

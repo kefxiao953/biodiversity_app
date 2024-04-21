@@ -48,10 +48,18 @@ if species:  # Check if the input is not empty
             # Fetch data only if the species has changed
             st.session_state.df = gbif_data(species)
             st.session_state.previous_species = species
-        st.write(st.session_state.df)  # Display the data
+
+        # Columns to show in df
+        columns_to_display = ['occurrenceStatus',
+                              'iucnRedListCategory', 'eventDate',
+                              'decimalLatitude', 'decimalLongitude',
+                              'lifeStage', 'sex']
+        # Display data
+        st.dataframe(st.session_state.df[columns_to_display])
+        
 else:
     # Prompt for input if it is empty
-    st.write("Please selelct a scientific name to search.")
+    st.write("Please select a scientific name to search.")
 
 
 # process_raster_files(input_directory, west, south,

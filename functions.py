@@ -11,7 +11,7 @@ import base64
 import glob
 import os
 
-from pyimpute import load_training_vector, load_targets, impute
+# from pyimpute import load_training_vector, load_targets, impute
 from streamlit_folium import folium_static, st_folium
 from rasterio.windows import from_bounds
 from shapely.geometry import Point, box

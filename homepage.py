@@ -17,7 +17,8 @@ st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
 st.subheader("Predict a Sustainable Future.")
 text = '''  
-Explore how we can balance sustainable development with biodiversity conservation :handshake:. 
+Development does not have to come at the cost of extreme biodiversity loss.  
+Take action for sustainable development & conservation :handshake:. 
 '''
 st.markdown(text)
 st.divider()

@@ -33,7 +33,7 @@ Explore the map or query our dataset to explore how bats and coffee influence ec
 st.markdown(maptext)
 
 # Creating geodataframe
-df = pd.read_csv('~/data/bio/data/bats.tsv', sep='\t')
+df = pd.read_csv('data/bats.tsv', sep='\t')
 df = df[["decimalLatitude", "decimalLongitude"]]
 geometry = gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude)
 gdf = gpd.GeoDataFrame(df, geometry=geometry)

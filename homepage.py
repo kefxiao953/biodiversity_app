@@ -1,4 +1,10 @@
+import folium
+from folium import plugins
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import pandas as pd
 import streamlit as st
+from streamlit_folium import folium_static, st_folium
 
 # configure page
 st.set_page_config(
@@ -11,9 +17,38 @@ st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
 st.subheader("Predict a Sustainable Future.")
 text = '''  
-Explore Earth's biodiversity data below. 
+Explore how we can balance sustainable development with biodiversity conservation :handshake:. 
 '''
 st.markdown(text)
+st.divider()
+
+maptext = """
+Bats can help measure forest health.  
+We have an extensive dataset of bats in Colombia, a major source of global coffee beans.  
+Explore the map or query our dataset to explore how bats and coffee influence ecosystem health.  
+**still in development**
+"""
+# Folium heatmap of available data so far
+st.markdown(maptext)
+
+# Creating geodataframe
+df = pd.read_csv('~/data/bio/data/bats.tsv', sep='\t')
+df = df[["decimalLatitude", "decimalLongitude"]]
+geometry = gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude)
+gdf = gpd.GeoDataFrame(df, geometry=geometry)
+
+# Heatmap
+heatmap = folium.Map(
+    location = [0.75,-74],
+    zoom_start = 7
+      )
+
+heat_data = [[point.xy[1][0], point.xy[0][0]] for point in gdf.geometry ]
+plugins.HeatMap(heat_data).add_to(heatmap)
+
+
+
+st_folium(heatmap, width=725, height=500)
 
 
 # Open the raster file

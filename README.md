@@ -1,4 +1,5 @@
-# Biopraedico: Predicting a sustainable future through biodiversity forecasting
+# Biopraedico: Predicting a sustainable future through biodiversity forecasting  
+Visit our app [here!](https://github.com/myabarca/biopraedico](http://biopraedico.streamlit.app)
 
 ## Purpose
 This repository supports a biodiversity forecasting project, employing a combination of geospatial analysis, machine learning, and interactive visualizations to predict species distributions. We integrate datasets on species presence and bioclimatic features and employ ensembled modeling techniques, with the goal of aiding a variety of stakeholders in making informed decisions around sustainable development, conservation, and consumption.

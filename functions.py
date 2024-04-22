@@ -32,7 +32,7 @@ from lightgbm import LGBMClassifier
 
 def load_data():
     if 'df_tortise' not in st.session_state:
-        dfs = os.path.expanduser("~/data/bio/data/tortoise.tsv")
+        dfs = os.path.expanduser("data/tortoise.tsv")
         st.session_state.df_tortise = pd.read_csv(dfs, sep='\t')
 
 
@@ -75,51 +75,51 @@ def gbif_data(scientificName, max_pages=1):
     return pd.DataFrame(all_results)
 
 # Specify the directory containing the raster files
-input_directory = os.path.expanduser("~/data/bio/data/wc2")
-output_directory = os.path.expanduser(
-    "~/data/bio/inputs/cropped_bioclim_tortoise")
+# input_directory = os.path.expanduser("~/data/bio/data/wc2")
+# output_directory = os.path.expanduser(
+#     "~/data/bio/inputs/cropped_bioclim_tortoise")
 
 # Define geographic coordinates for the bounding box
 # example for tortoises
-west, south, east, north = -120, 24, -100, 45
+# west, south, east, north = -120, 24, -100, 45
 
 
-def process_raster_files(directory, west, south, east, north, output_dir):
-    """
-    Crop the bioclim raster files to an area of interest.
+# def process_raster_files(directory, west, south, east, north, output_dir):
+#     """
+#     Crop the bioclim raster files to an area of interest.
 
-    Args:
-    directory (str): Directory where bioclim rasters live.
-    west (numeric): Westernmost extent desired
-    south (numeric): Southmost extent desired
-    east (numeric): Easternmost extent desired
-    north (num): Northmost extent desired
-    """
-    # Create the output directory if it does not exist
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+#     Args:
+#     directory (str): Directory where bioclim rasters live.
+#     west (numeric): Westernmost extent desired
+#     south (numeric): Southmost extent desired
+#     east (numeric): Easternmost extent desired
+#     north (num): Northmost extent desired
+#     """
+#     # Create the output directory if it does not exist
+#     if not os.path.exists(output_dir):
+#         os.makedirs(output_dir)
 
-    # Walk through all files in the input directory
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith('.tif'):
-                file_path = os.path.join(root, file)
-                with rasterio.open(file_path) as src:
-                    # Convert geographic coordinates to raster window
-                    window = from_bounds(
-                        west, south, east, north, src.transform)
+#     # Walk through all files in the input directory
+#     for root, dirs, files in os.walk(directory):
+#         for file in files:
+#             if file.endswith('.tif'):
+#                 file_path = os.path.join(root, file)
+#                 with rasterio.open(file_path) as src:
+#                     # Convert geographic coordinates to raster window
+#                     window = from_bounds(
+#                         west, south, east, north, src.transform)
 
-                    # Read the data in the window, cropping to the extent
-                    data = src.read(window=window)
+#                     # Read the data in the window, cropping to the extent
+#                     data = src.read(window=window)
 
-                    # Loop through each band and write to ASCII
-                    for i in range(1, src.count + 1):
-                        output_path = os.path.join(
-                            output_dir, f'{os.path.splitext(file)[0]}_band{i}.asc')
-                        with rasterio.open(output_path, 'w', driver='AAIGrid', height=window.height, width=window.width,
-                                           count=1, dtype=data.dtype, transform=rasterio.windows.transform(window, src.transform)) as dst:
-                            # Write each band to a new file
-                            dst.write(data[i-1], 1)
+#                     # Loop through each band and write to ASCII
+#                     for i in range(1, src.count + 1):
+#                         output_path = os.path.join(
+#                             output_dir, f'{os.path.splitext(file)[0]}_band{i}.asc')
+#                         with rasterio.open(output_path, 'w', driver='AAIGrid', height=window.height, width=window.width,
+#                                            count=1, dtype=data.dtype, transform=rasterio.windows.transform(window, src.transform)) as dst:
+#                             # Write each band to a new file
+#                             dst.write(data[i-1], 1)
 
 
 # def visualize_raster(file_path):
@@ -171,115 +171,115 @@ def process_raster_files(directory, west, south, east, north, output_dir):
 #     return st_folium(m, width=725, height=500)
 
 
-def create_folium_map_with_raster_overlay(file_path):
-    """
-    Creates a Folium map with a specified raster overlay.
+# def create_folium_map_with_raster_overlay(file_path):
+#     """
+#     Creates a Folium map with a specified raster overlay.
 
-    Args:
-    file_path (str): Path to the raster file.
-    """
-    with rasterio.open(file_path) as src:
-        # Get the raster bounds
-        bounds = src.bounds
+#     Args:
+#     file_path (str): Path to the raster file.
+#     """
+#     with rasterio.open(file_path) as src:
+#         # Get the raster bounds
+#         bounds = src.bounds
 
-        # Read the first band
-        data = src.read(1)
+#         # Read the first band
+#         data = src.read(1)
 
-        # Normalize the data for better visualization
-        normalized_data = (data - data.min()) / (data.max() - data.min())
+#         # Normalize the data for better visualization
+#         normalized_data = (data - data.min()) / (data.max() - data.min())
 
-        # Create a plot
-        fig, ax = plt.subplots(frameon=False, figsize=(10, 10))
-        plt.axis('off')
-        colormap = plt.cm.viridis  # Change the colormap to something appropriate for your data
-        show(normalized_data, ax=ax, cmap=colormap,
-             transform=src.transform, adjust='datalim')
+#         # Create a plot
+#         fig, ax = plt.subplots(frameon=False, figsize=(10, 10))
+#         plt.axis('off')
+#         colormap = plt.cm.viridis  # Change the colormap to something appropriate for your data
+#         show(normalized_data, ax=ax, cmap=colormap,
+#              transform=src.transform, adjust='datalim')
 
-        # Save the plot to a PNG image in memory
-        img = BytesIO()
-        plt.savefig(img, format='png', bbox_inches='tight',
-                    pad_inches=0, transparent=True)
-        img.seek(0)
-        img_base64 = base64.b64encode(img.read()).decode('utf-8')
+#         # Save the plot to a PNG image in memory
+#         img = BytesIO()
+#         plt.savefig(img, format='png', bbox_inches='tight',
+#                     pad_inches=0, transparent=True)
+#         img.seek(0)
+#         img_base64 = base64.b64encode(img.read()).decode('utf-8')
 
-    # Define the image overlay bounds
-    image_bounds = [[bounds.bottom, bounds.left], [bounds.top, bounds.right]]
+#     # Define the image overlay bounds
+#     image_bounds = [[bounds.bottom, bounds.left], [bounds.top, bounds.right]]
 
-    # Create a folium map centered on your data
-    m = folium.Map(location=[(bounds.top + bounds.bottom) / 2,
-                   (bounds.left + bounds.right) / 2], zoom_start=4)
+#     # Create a folium map centered on your data
+#     m = folium.Map(location=[(bounds.top + bounds.bottom) / 2,
+#                    (bounds.left + bounds.right) / 2], zoom_start=4)
 
-    # Add the image overlay to the map
-    folium.raster_layers.ImageOverlay(
-        image='data:image/png;base64,' + img_base64,
-        bounds=image_bounds,
-        opacity=0.6  # Adjust opacity as needed
-    ).add_to(m)
+    # # Add the image overlay to the map
+    # folium.raster_layers.ImageOverlay(
+    #     image='data:image/png;base64,' + img_base64,
+    #     bounds=image_bounds,
+    #     opacity=0.6  # Adjust opacity as needed
+    # ).add_to(m)
 
-    return st_folium(m, width=725, height=500)
+    # return st_folium(m, width=725, height=500)
 
 
 ################## PRESENCE & ABSENCE SAMPLING ##################
 
-def sample_background_points(raster, num_points, extent_factor):
-    """
-    Generates background points based on extent of presence points.
-    """
-    with rasterio.open(raster) as src:
-        # Create a bounding box that is 25% larger (sampling from a larger area helps with edge effects)
-        b = src.bounds
-        width = (b.right - b.left) * (extent_factor - 1) / 2
-        height = (b.top - b.bottom) * (extent_factor - 1) / 2
-        # larger_extent = box(b.left - width, b.bottom -
-        #                     height, b.right + width, b.top + height)
+# def sample_background_points(raster, num_points, extent_factor):
+#     """
+#     Generates background points based on extent of presence points.
+#     """
+#     with rasterio.open(raster) as src:
+#         # Create a bounding box that is 25% larger (sampling from a larger area helps with edge effects)
+#         b = src.bounds
+#         width = (b.right - b.left) * (extent_factor - 1) / 2
+#         height = (b.top - b.bottom) * (extent_factor - 1) / 2
+#         # larger_extent = box(b.left - width, b.bottom -
+#         #                     height, b.right + width, b.top + height)
 
-        # Generate random points within the larger extent
-        xs = np.random.uniform(b.left - width, b.right + width, num_points)
-        ys = np.random.uniform(b.bottom - height, b.top + height, num_points)
+#         # Generate random points within the larger extent
+#         xs = np.random.uniform(b.left - width, b.right + width, num_points)
+#         ys = np.random.uniform(b.bottom - height, b.top + height, num_points)
 
-        # Filter points to lie within the original raster extent
-        points = gpd.GeoDataFrame(geometry=gpd.points_from_xy(xs, ys))
-        original_extent = box(b.left, b.bottom, b.right, b.top)
-        points = points[points.geometry.within(original_extent)]
+#         # Filter points to lie within the original raster extent
+#         points = gpd.GeoDataFrame(geometry=gpd.points_from_xy(xs, ys))
+#         original_extent = box(b.left, b.bottom, b.right, b.top)
+#         points = points[points.geometry.within(original_extent)]
 
-    return points
+#     return points
 
 
-def perform_model_evaluations(train_xs, train_y, target_xs, raster_info, st):
-    """
-    Perform model fitting, cross-validation, and spatial prediction for multiple classifiers.
+# def perform_model_evaluations(train_xs, train_y, target_xs, raster_info, st):
+#     """
+#     Perform model fitting, cross-validation, and spatial prediction for multiple classifiers.
 
-    Args:
-    train_xs (array-like): Training data features.
-    train_y (array-like): Training data labels.
-    target_xs (array-like): Target data features for spatial prediction.
-    raster_info (dict): Information or metadata about the raster data used in spatial prediction.
-    st (module): The Streamlit module for logging outputs in a Streamlit app.
-    """
+#     Args:
+#     train_xs (array-like): Training data features.
+#     train_y (array-like): Training data labels.
+#     target_xs (array-like): Target data features for spatial prediction.
+#     raster_info (dict): Information or metadata about the raster data used in spatial prediction.
+#     st (module): The Streamlit module for logging outputs in a Streamlit app.
+    # """
 
-    CLASS_MAP = {
-        'rf': RandomForestClassifier(),
-        'et': ExtraTreesClassifier(),
-        'xgb': XGBClassifier(),
-    }
+    # CLASS_MAP = {
+    #     'rf': RandomForestClassifier(),
+    #     'et': ExtraTreesClassifier(),
+    #     'xgb': XGBClassifier(),
+    # }
 
-    # Model fitting and spatial range prediction
-    for name, model in CLASS_MAP.items():
-        # Cross validation for accuracy scores (displayed as a percentage)
-        k = 5  # k-fold
-        kf = model_selection.KFold(n_splits=k)
-        accuracy_scores = model_selection.cross_val_score(
-            model, train_xs, train_y, cv=kf, scoring='accuracy')
-        st.write(f"{name} {k}-fold Cross Validation Accuracy: {accuracy_scores.mean() * 100:.2f} (+/- {accuracy_scores.std() * 200:.2f})")
+    # # Model fitting and spatial range prediction
+    # for name, model in CLASS_MAP.items():
+    #     # Cross validation for accuracy scores (displayed as a percentage)
+    #     k = 5  # k-fold
+    #     kf = model_selection.KFold(n_splits=k)
+    #     accuracy_scores = model_selection.cross_val_score(
+    #         model, train_xs, train_y, cv=kf, scoring='accuracy')
+    #     st.write(f"{name} {k}-fold Cross Validation Accuracy: {accuracy_scores.mean() * 100:.2f} (+/- {accuracy_scores.std() * 200:.2f})")
 
-        # Spatial prediction
-        model.fit(train_xs, train_y)
-        output_directory = 'outputs/' + name + '-images'
-        if not os.path.exists(output_directory):
-            os.makedirs(output_directory)
+    #     # Spatial prediction
+    #     model.fit(train_xs, train_y)
+    #     output_directory = 'outputs/' + name + '-images'
+    #     if not os.path.exists(output_directory):
+    #         os.makedirs(output_directory)
 
-        impute(target_xs, model, raster_info, outdir=output_directory,
-               class_prob=True, certainty=True)
+    #     impute(target_xs, model, raster_info, outdir=output_directory,
+    #            class_prob=True, certainty=True)
 
 
 def load_raster_data(filepath):

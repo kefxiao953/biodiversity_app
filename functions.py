@@ -20,11 +20,11 @@ from rasterio.plot import show
 from io import BytesIO
 from pylab import plt
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn import model_selection
-from xgboost import XGBClassifier
-from lightgbm import LGBMClassifier
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.ensemble import ExtraTreesClassifier
+# from sklearn import model_selection
+# from xgboost import XGBClassifier
+# from lightgbm import LGBMClassifier
 
 ######################################
 # Function to load data, if not already in session state

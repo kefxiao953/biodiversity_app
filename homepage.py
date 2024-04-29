@@ -48,7 +48,7 @@ while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
 
-col1, col2, col3, col4 = st.columns(2)
+col1, col2, col3, col4 = st.columns(4)
 
 with col3:
     demo = st.button("Request a Consultation")

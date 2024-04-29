@@ -24,7 +24,7 @@ with col1:
     st.write(' ')
 
 with col2:
-    st.image("intro.png", output_format='PNG')
+    st.image("intro.png", output_format='PNG', width=400)
 
 with col3:
     st.write(' ')
@@ -33,7 +33,7 @@ with col1:
     st.write(' ')
 
 with col2:
-    st.image("$125-140 trillion: Estimated value of ecosystem services in US dollars for 2019 ")
+    st.write("$125-140 trillion: Estimated value of ecosystem services in US dollars for 2019 ")
 
 with col3:
     st.write(' ')

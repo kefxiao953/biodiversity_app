@@ -19,16 +19,16 @@ st.divider()
 # st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
 #             unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns(3)
+# col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.write(' ')
+# with col1:
+#     st.write(' ')
 
-with col2:
-    st.image("intro.png", output_format='PNG', width=1000)
+# with col2:
+st.image("intro.png", output_format='PNG', width=1000)
 
-with col3:
-    st.write(' ')
+# with col3:
+#     st.write(' ')
 
 # with col1:
 #     st.write(' ')
@@ -53,11 +53,11 @@ col1, col2, col3, col4 = st.columns(4)
 with col3:
     demo = st.button("Request a Consultation")
     if demo:
-        switch_page("pages/2_request_consult")
+        switch_page("pages/2_request_consult.py")
 with col4:
     demo = st.button("Explore our Data")
     if demo:
-        switch_page("pages/1_customer_page")
+        switch_page("pages/1_customer_page.py")
 # <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 # to conservation groups to everyday consumers to make decisions that advance sustainable development
 # while preserving ecosystems.</h3>""", unsafe_allow_html=True)

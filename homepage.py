@@ -19,25 +19,8 @@ st.divider()
 # st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
 #             unsafe_allow_html=True)
 
-# col1, col2, col3 = st.columns(3)
 
-# with col1:
-#     st.write(' ')
-
-# with col2:
 st.image("intro.png", output_format='PNG', width=1000)
-
-# with col3:
-#     st.write(' ')
-
-# with col1:
-#     st.write(' ')
-
-# with col2:
-#     st.write("$125-140 trillion: Estimated value of ecosystem services in US dollars for 2019 ")
-
-# with col3:
-#     st.write(' ')
 
 st.markdown("""
 <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
@@ -48,17 +31,6 @@ while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
 
-def load_pages():
-    # Assume pages are dynamically loaded and registered here
-    pagess = {filename.stem: filename for filename in Path("pages").glob("*.py")}
-    print("Registered pages:", pagess)
-    return pagess
-
-pages = load_pages()
-if '2_request_consult' in pages:
-    switch_page('2_request_consult')
-else:
-    st.error("Page not found!")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:

@@ -15,7 +15,11 @@ st.set_page_config(
 
 st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-st.subheader("Predict a Sustainable Future.")
+st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future.</h1>",
+            unsafe_allow_html=True)
+
+st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
+st.subheader("")
 text = '''  
 Development does not have to come at the cost of extreme biodiversity loss.  
 Take action for sustainable development & conservation :handshake:. 

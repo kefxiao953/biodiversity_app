@@ -15,26 +15,30 @@ st.set_page_config(
 
 st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future.</h1>",
+st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
             unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
-st.subheader("")
-text = '''  
-Development does not have to come at the cost of extreme biodiversity loss.  
-Take action for sustainable development & conservation :handshake:. 
+st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion :moneybag:</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: green;'>Become a leader in preserving the world's ecosystems and economies.</h2>", unsafe_allow_html=True)
+
+text = '''
+Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
+to conservation groups to everyday consumers to make decisions that advance sustainable development
+while preserving ecosystems.
+:handshake:. 
 '''
 st.markdown(text)
 st.divider()
 
-maptext = """
-Bats can help measure forest health.  
-We have an extensive dataset of bats in Colombia, a major source of global coffee beans.  
-Explore the map or query our dataset to explore how bats and coffee influence ecosystem health.  
-**still in development**
-"""
+# maptext = """
+# Bats can help measure forest health.  
+# We have an extensive dataset of bats in Colombia, a major source of global coffee beans.  
+# Explore the map or query our dataset to explore how bats and coffee influence ecosystem health.  
+# **still in development**
+# """
 # Folium heatmap of available data so far
-st.markdown(maptext)
+# st.markdown(maptext)
 
 # Creating geodataframe
 df = pd.read_csv('data/bats.tsv', sep='\t')

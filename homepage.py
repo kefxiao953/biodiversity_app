@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 from streamlit_folium import folium_static, st_folium
+from streamlit_extras.switch_page_button import switch_page
 
 # configure page
 st.set_page_config(
@@ -41,12 +42,14 @@ with col3:
 st.markdown("""
 <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 to conservation groups to everyday consumers to make decisions that advance sustainable development
-while preserving ecosystems.</h3>""", unsafe_allow_html=True)
+while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 
 # st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: black;'>Become a leader in preserving the world's ecosystems and economies.</h3>", unsafe_allow_html=True)
-
+st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies today.</h3>", unsafe_allow_html=True)
+demo = st.button("Request a Consultation")
+if demo:
+    switch_page("pages/2_request_consult")
 # st.markdown("""
 # <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 # to conservation groups to everyday consumers to make decisions that advance sustainable development

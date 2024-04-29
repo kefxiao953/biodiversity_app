@@ -24,7 +24,7 @@ with col1:
     st.write(' ')
 
 with col2:
-    st.image("intro.png")
+    st.image("intro.png", output_format='PNG')
 
 with col3:
     st.write(' ')

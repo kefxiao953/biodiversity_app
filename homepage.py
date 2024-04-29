@@ -15,17 +15,42 @@ st.set_page_config(
 
 st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
-            unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
+#             unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: black;'>Become a leader in preserving the world's ecosystems and economies.</h3>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.write(' ')
+
+with col2:
+    st.image("intro.png")
+
+with col3:
+    st.write(' ')
+
+with col1:
+    st.write(' ')
+
+with col2:
+    st.image("$125-140 trillion: Estimated value of ecosystem services in US dollars for 2019 ")
+
+with col3:
+    st.write(' ')
 
 st.markdown("""
 <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 to conservation groups to everyday consumers to make decisions that advance sustainable development
 while preserving ecosystems.</h3>""", unsafe_allow_html=True)
+
+# st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
+# st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: black;'>Become a leader in preserving the world's ecosystems and economies.</h3>", unsafe_allow_html=True)
+
+# st.markdown("""
+# <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
+# to conservation groups to everyday consumers to make decisions that advance sustainable development
+# while preserving ecosystems.</h3>""", unsafe_allow_html=True)
 
 # text = '''
 # Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors

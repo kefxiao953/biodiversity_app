@@ -48,16 +48,27 @@ while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
 
+def load_pages():
+    # Assume pages are dynamically loaded and registered here
+    pages = {filename.stem: filename for filename in Path("pages").glob("*.py")}
+    print("Registered pages:", pages)
+    return pages
+
+pages = load_pages()
+if '2_request_consult' in pages:
+    switch_page('2_request_consult')
+else:
+    st.error("Page not found!")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     demo = st.button("Request a Consultation")
     if demo:
-        switch_page("2_request_consult.py")
+        switch_page("2_request_consult")
 with col2:
     demo = st.button("Explore our Data")
     if demo:
-        switch_page("./pages/1_customer_page.py")
+        switch_page("1_customer_page")
 # <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 # to conservation groups to everyday consumers to make decisions that advance sustainable development
 # while preserving ecosystems.</h3>""", unsafe_allow_html=True)

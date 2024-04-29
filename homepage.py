@@ -18,17 +18,22 @@ st.divider()
 st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
             unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion :moneybag:</h2>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h2>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center; color: green;'>Become a leader in preserving the world's ecosystems and economies.</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: black;'>Become a leader in preserving the world's ecosystems and economies.</h3>", unsafe_allow_html=True)
 
-text = '''
-Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
+st.markdown("""
+<h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 to conservation groups to everyday consumers to make decisions that advance sustainable development
-while preserving ecosystems.
-:handshake:. 
-'''
-st.markdown(text)
+while preserving ecosystems.</h3>""", unsafe_allow_html=True)
+
+# text = '''
+# Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
+# to conservation groups to everyday consumers to make decisions that advance sustainable development
+# while preserving ecosystems.
+# :handshake:. 
+# '''
+# st.markdown(text)
 st.divider()
 
 # maptext = """

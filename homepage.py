@@ -20,23 +20,23 @@ st.divider()
 
 col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.write(' ')
+# with col1:
+#     st.write(' ')
 
-with col2:
-    st.image("intro.png", output_format='PNG', width=800)
+# with col2:
+st.image("intro.png", output_format='PNG', width=800)
 
-with col3:
-    st.write(' ')
+# with col3:
+#     st.write(' ')
 
-with col1:
-    st.write(' ')
+# with col1:
+#     st.write(' ')
 
 # with col2:
 #     st.write("$125-140 trillion: Estimated value of ecosystem services in US dollars for 2019 ")
 
-with col3:
-    st.write(' ')
+# with col3:
+#     st.write(' ')
 
 st.markdown("""
 <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors

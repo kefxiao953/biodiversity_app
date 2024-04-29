@@ -50,9 +50,9 @@ st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in ad
 
 def load_pages():
     # Assume pages are dynamically loaded and registered here
-    pages = {filename.stem: filename for filename in Path("pages").glob("*.py")}
-    print("Registered pages:", pages)
-    return pages
+    pagess = {filename.stem: filename for filename in Path("pages").glob("*.py")}
+    print("Registered pages:", pagess)
+    return pagess
 
 pages = load_pages()
 if '2_request_consult' in pages:

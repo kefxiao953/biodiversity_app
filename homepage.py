@@ -33,26 +33,24 @@ st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in ad
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    demo = st.button("Request a Consultation")
-    if demo:
-        switch_page("2_request_consult")
+    demo1 = st.button("Request a Consultation", key="demo1")
+    if demo1:
+        switch_page("request consult")
 with col2:
-    demo = st.button("Explore our Data")
-    if demo:
-        switch_page("3_explore_data")
+    demo2 = st.button("Explore our Data", key="demo2")
+    if demo2:
+        switch_page("explore data")
 
 st.divider()
 
 # maptext = """
-# Bats can help measure forest health.  
-# We have an extensive dataset of bats in Colombia, a major source of global coffee beans.  
-# Explore the map or query our dataset to explore how bats and coffee influence ecosystem health.  
+# Bats can help measure forest health.
+# We have an extensive dataset of bats in Colombia, a major source of global coffee beans.
+# Explore the map or query our dataset to explore how bats and coffee influence ecosystem health.
 # **still in development**
 # """
 # Folium heatmap of available data so far
 # st.markdown(maptext)
-
-
 
 
 # Open the raster file
@@ -155,4 +153,3 @@ col2, col3 = st.columns(2)
 # target_xs, raster_info = load_targets(raster_features)
 # # check shape, does it match the size above of the observations?
 # train_xs.shape, train_y.shape
-

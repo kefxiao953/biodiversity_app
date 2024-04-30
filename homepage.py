@@ -16,8 +16,7 @@ st.set_page_config(
 
 st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-st.subheader("Predict a Sustainable Future",
-            unsafe_allow_html=True)
+st.subheader("Predict a Sustainable Future")
 
 
 st.image("intro.png", output_format='PNG', width=1000)

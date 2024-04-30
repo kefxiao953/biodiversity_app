@@ -16,8 +16,8 @@ st.set_page_config(
 
 st.header("Welcome to Biopraedico :crystal_ball:")
 st.divider()
-# st.markdown("<h1 style='text-align: center; color: black;'>Predict a Sustainable Future</h1>",
-#             unsafe_allow_html=True)
+st.subheader("Predict a Sustainable Future",
+            unsafe_allow_html=True)
 
 
 st.image("intro.png", output_format='PNG', width=1000)
@@ -40,18 +40,8 @@ with col1:
 with col2:
     demo = st.button("Explore our Data")
     if demo:
-        switch_page("1_customer_page")
-# <h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
-# to conservation groups to everyday consumers to make decisions that advance sustainable development
-# while preserving ecosystems.</h3>""", unsafe_allow_html=True)
+        switch_page("3_explore_data")
 
-# text = '''
-# Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
-# to conservation groups to everyday consumers to make decisions that advance sustainable development
-# while preserving ecosystems.
-# :handshake:. 
-# '''
-# st.markdown(text)
 st.divider()
 
 # maptext = """
@@ -63,24 +53,7 @@ st.divider()
 # Folium heatmap of available data so far
 # st.markdown(maptext)
 
-# Creating geodataframe
-df = pd.read_csv('data/bats.tsv', sep='\t')
-df = df[["decimalLatitude", "decimalLongitude"]]
-geometry = gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude)
-gdf = gpd.GeoDataFrame(df, geometry=geometry)
 
-# Heatmap
-heatmap = folium.Map(
-    location = [0.75,-74],
-    zoom_start = 7
-      )
-
-heat_data = [[point.xy[1][0], point.xy[0][0]] for point in gdf.geometry ]
-plugins.HeatMap(heat_data).add_to(heatmap)
-
-
-
-st_folium(heatmap, width=725, height=500)
 
 
 # Open the raster file

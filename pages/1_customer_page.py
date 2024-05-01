@@ -102,15 +102,32 @@ colormap = linear.YlGnBu_09.scale(0, distr_averaged.max())
 colormap.caption = 'Probability Distribution'
 
 # with colb:
-st.markdown("<h3 style='text-align: center;'>Desert Tortoise Predicted Range- Current</h3>",
+st.markdown("<h3 style='text-align: left;'>Desert Tortoise Predicted Range- Current</h3>",
             unsafe_allow_html=True)
 create_folium_map(colormap)
 
-text = """This site is expected to overlap with desert tortoise habitat with a 70-85% probability.  
-        Because of this animal's endangered status, expect to budget mitigation costs into the total cost  
-        of this project's construction and operation.
+text = """
+**SUMMARY**  
+This project has high probability (>70%) of overlap with sensitive habitat for the desert tortoise.   
+Mitigation is expected to cost:  
+__USD 801/acre* at 4000 acres__,   
+totalling __USD 3.2 million__.  
+
+The emission reduction impact of this species is estimated to be:   
+**7.8 megatons (7.8 million metric tons)***.  
+The total solar output required to mitigate this carbon impact would need to equal:  
+**the electricity use of 197,356 homes for one year**. 
         """
 st.markdown(text)
+
+reference = """
+    <small style='font-size: 9px;'>https://www.wecc.org/Reliability/2013_Mitigation_Cost_Study_FinalReport_EDTF.pdf</small>  
+    <small style='font-size: 9px;'>https://legal-planet.org/2021/07/01/the-extinction-cost-of-carbon/</small>  
+    <small style='font-size: 9px;'>https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator#results</small>
+
+    """
+
+st.markdown(reference, unsafe_allow_html=True)
 
 st.title("Predicted Range - 2050")
 st.write('add these forecasts next. need raster predictions for the future.')

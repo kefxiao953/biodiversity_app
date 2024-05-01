@@ -2,7 +2,7 @@ import streamlit as st
 from functions import *
 import pickle
 
-st.header("Welcome, BrightSource Energy")
+st.title("Welcome, BrightSource Energy")
 
 st.divider()
 
@@ -17,8 +17,8 @@ folium.Marker(
 
 st_folium(m, width=725, height=500)
 
-species = st.selectbox(
-   "Review sensitive species at this site",
+st.header("Review sensitive species at this site:")
+species = st.selectbox("Species: Desert Tortoise",
    ["Gopherus agassizii (Cooper, 1861)"],
    placeholder="Select species...",
 )
@@ -60,23 +60,6 @@ if species:  # Check if the input is not empty
 else:
     # Prompt for input if it is empty
     st.write("Please select a scientific name to search.")
-
-
-# process_raster_files(input_directory, west, south,
-#                      east, north, output_directory)
-
-
-# st.header("A focus on the desert tortise :- Gopherus agassizii (Cooper, 1861)")
-# st.write("---")
-
-# with open('training_data.pkl', 'rb') as f:
-#     train_xs, train_y = pickle.load(f)
-
-# with open('target_data.pkl', 'rb') as f:
-#     target_xs, raster_info = pickle.load(f)
-
-# st.subheader("Model Evaluations")
-# perform_model_evaluations(train_xs, train_y, target_xs, raster_info, st)
 
 
 st.title("Predicted Range")
@@ -130,4 +113,47 @@ reference = """
 st.markdown(reference, unsafe_allow_html=True)
 
 st.title("Predicted Range - 2050")
-st.write('add these forecasts next. need raster predictions for the future.')
+
+# Open the raster file to find bounds
+with rasterio.open("outputs/rf-images_tortoise_2050/probability_1.0.tif") as src:
+    bounds = src.bounds
+    crs = src.crs
+
+m = folium.Map(location=[35.5, -115.5], zoom_start=9.5)
+
+# Add the image overlay
+folium.raster_layers.ImageOverlay(
+    image='outputs/distr_averaged_tortoise_2050.png',
+    bounds=[[bounds.bottom, bounds.left], [bounds.top, bounds.right]],
+    opacity=0.6,
+    interactive=True,
+    cross_origin=False,
+    zindex=1,
+).add_to(m)
+
+# Solar field polygon vertices
+coordinates = [
+[35.59, -115.50],
+[35.599, -115.41],
+[35.52, -115.48]
+]
+
+# Create polygon and add it to the map
+folium.vector_layers.Polygon(
+    locations=coordinates,  # List of coordinates
+    color='blue'          # Color of the polygon's border
+).add_to(m)
+
+
+# Add colormap
+colormap.add_to(m)
+
+st_folium(m, width=725, height=500)
+
+text2 = """
+**SUMMARY**  
+This project has low projected probability (<20%) of overlap with habitat for the desert tortoise in 2050.     
+Areas of the __Kingston Range Wilderness & Mojave National Preserve__  
+should be prioritized for tortoise relocation mitigation efforts.   
+        """
+st.markdown(text2)

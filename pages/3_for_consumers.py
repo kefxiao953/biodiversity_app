@@ -17,6 +17,8 @@ consumers and help people support businesses with a visible positive impact.
 """
 st.markdown(text)
 
+# don't forget to add pictures of bird - maybe some from inaturalist to plug community science
+
 
 
 

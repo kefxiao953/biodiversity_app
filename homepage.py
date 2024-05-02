@@ -33,12 +33,12 @@ st.markdown("<h3 style='text-align: left; color: green;'>Become a leader in adva
 
 spacer1, col1, col2, spacer2 = st.columns([1, 2, 2, 1])
 
-with col1:
+with spacer1:
     demo1 = st.button("Request a Consultation", key="demo1")
     if demo1:
         switch_page("request consult")
 
-with col2:
+with col1:
     demo2 = st.button("Explore our Data", key="demo2")
     if demo2:
         switch_page("for consumers")

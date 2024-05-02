@@ -22,13 +22,13 @@ st.subheader("Predict a Sustainable Future")
 st.image("intro.png", output_format='PNG', width=1000)
 
 st.markdown("""
-<h3 style='text-align: center; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
+<h3 style='text-align: left; color: black;'>Biopraedico enables informed decisions around biodiversity impact. We are empowering everyone from investors
 to conservation groups to everyday consumers to make decisions that advance sustainable development
 while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 
 # st.markdown("<h2 style='text-align: center; color: green;'>$125-140 trillion</h2>", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: left; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
 
 
 spacer1, col1, col2, spacer2 = st.columns([1, 2, 2, 1])

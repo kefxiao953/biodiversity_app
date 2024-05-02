@@ -30,16 +30,18 @@ while preserving biodiversity.</h3>""", unsafe_allow_html=True)
 # st.markdown("<h3 style='text-align: center; color: black;'>Estimated value of ecosystem services in US dollars for 2019</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: green;'>Become a leader in advancing ecosystems and economies.</h3>", unsafe_allow_html=True)
 
-col1, col2, col3, col4 = st.columns(4)
+
+spacer1, col1, col2, spacer2 = st.columns([1, 2, 2, 1])
 
 with col1:
     demo1 = st.button("Request a Consultation", key="demo1")
     if demo1:
         switch_page("request consult")
+
 with col2:
     demo2 = st.button("Explore our Data", key="demo2")
     if demo2:
-        switch_page("explore data")
+        switch_page("for consumers")
 
 st.divider()
 

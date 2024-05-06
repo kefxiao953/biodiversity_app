@@ -19,7 +19,7 @@ st.divider()
 st.subheader("Predict a Sustainable Future")
 
 
-st.image("images/intro.png", output_format='PNG', width=1000)
+st.image("./images/intro.png", output_format='PNG', width=1000)
 
 st.markdown("""
 <h3 style='text-align: left; color: black;'>Biopraedico enables informed decisions around biodiversity impact.

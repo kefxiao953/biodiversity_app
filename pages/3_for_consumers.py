@@ -146,15 +146,15 @@ col1, col2, col3 = st.columns(3)
 # Display images with titles
 with col1:
     st.markdown("# Blue-headed Wood-Dove \n ## (Turtur brehmeri)")
-    st.image('bird1.png', use_column_width=True)
+    st.image('images/bird1.png', use_column_width=True)
 
 with col2:
     st.markdown("# Timneh African Grey Parrot \n ## (Psittacus timneh)")
-    st.image('bird2.png', use_column_width=True)
+    st.image('images/bird2.png', use_column_width=True)
 
 with col3:
     st.markdown("# Finsch's Flycatcher Thrush \n ## (Stizorhina finschi)")
-    st.image('bird3.png', use_column_width=True)
+    st.image('images/bird3.png', use_column_width=True)
 
 # Radio button selection below images for better visual flow
 bird_selection = st.radio("Select for details", [
@@ -164,7 +164,7 @@ bird_selection = st.radio("Select for details", [
 # Logic to display details based on radio button selection
 if bird_selection == "Bird 1 - Blue-headed Wood-Dove":
 
-    unique_species = pd.read_csv('nestle_unique_endangered_species.csv')
+    unique_species = pd.read_csv('data/nestle_unique_endangered_species.csv')
 
     # Write the count to the Streamlit app
     st.write(f"Count of Blue-headed Wood-Dove (Turtur brehmeri): 427")

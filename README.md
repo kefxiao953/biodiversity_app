@@ -15,7 +15,13 @@ Houses initial datasets used in analyses, including environmental variables from
 Contains input files for the models. These files are integral to the reproducibility of our analyses. This directory will also move to Google Cloud for better management.
 
 ### outputs: 
-Stores outputs from the models and scripts, such as processed data and visual results. These outputs fuel our web app visualizations. Migration to cloud storage is planned for this directory as well.
+Stores outputs from the models and scripts, such as processed data and visual results. These outputs fuel our web app visualizations. Migration to cloud storage is planned for this directory as well.  
+
+### images:  
+Images used on our Streamlit app.  
+
+### pages:  
+Directory that Streamlit expects to navigate webpages.
 
 ### presence_absence.ipynb: 
 Jupyter Notebook for initial data processing, analysis setup, and exploratory data visualization.
@@ -27,7 +33,7 @@ Jupyter Notebook for initial data processing, analysis setup, and exploratory da
 Enhanced documentation notebook that provides a detailed walkthrough of the data processing and analysis pipeline, intended for educational purposes and new project members.
 
 ### homepage.py: 
-The main script for the Streamlit application, facilitating interactive data exploration and visualization. It integrates functionalities defined in functions.py to provide a dynamic web interface.
+The file Streamlit expects to run the page. It integrates functionalities defined in functions.py to provide a dynamic web interface. Run `streamlit run homepage.py`.
 
 ### functions.py: 
 Contains all the reusable code functions used across different parts of the project, such as data loading, raster processing, and visualization. This module supports the modularity and maintainability of the codebase.

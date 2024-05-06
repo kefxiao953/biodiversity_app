@@ -23,14 +23,11 @@ Images used on our Streamlit app.
 ### pages:  
 Directory that Streamlit expects to navigate webpages.
 
-### presence_absence.ipynb: 
-Jupyter Notebook for initial data processing, analysis setup, and exploratory data visualization.
+### annotated_presence_absence.ipynb: 
+Documentation notebook that provides a detailed walkthrough of the data processing and analysis pipeline for the BrightSource Energy Desert Tortoise case study.  
 
 ### presence_absence_bird.ipynb: 
-Jupyter Notebook for initial data processing, analysis setup, and exploratory data visualization specifically for our Nestle consumer page example for the Blue Headed Dove.
-
-### annotated_presence_absence.ipynb: 
-Enhanced documentation notebook that provides a detailed walkthrough of the data processing and analysis pipeline, intended for educational purposes and new project members.
+Jupyter Notebook for  data processing, analysis setup, and exploratory data visualization specifically for our Nestle consumer page example for the Blue Headed Dove.
 
 ### homepage.py: 
 The file Streamlit expects to run the page. It integrates functionalities defined in functions.py to provide a dynamic web interface. Run `streamlit run homepage.py`.

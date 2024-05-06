@@ -9,13 +9,13 @@ View dependencies [here.](requirements.txt)
 
 ## Project Structure
 ### data: 
-Houses initial datasets used in analyses, including environmental variables from WorldClim and species observations from the Global Biodiversity Information Facility (GBIF). As part of our project's scaling strategy, this folder will transition to cloud storage for enhanced accessibility and performance.
+Houses initial datasets used in analyses, including the 19 environmental variables from WorldClim and species observations from the Global Biodiversity Information Facility (GBIF). As part of our project's scaling strategy, this folder will transition to cloud storage for enhanced accessibility and performance.
 
 ### inputs: 
-Contains input files for the models. These files are integral to the reproducibility of our analyses. This directory will also move to Google Cloud for better management.
+Contains input raster files for the models. These files are integral to the reproducibility of our analyses. This directory will also move to Google Cloud for better management.
 
 ### outputs: 
-Stores outputs from the models and scripts, such as processed data and visual results. These outputs fuel our web app visualizations. Migration to cloud storage is planned for this directory as well.  
+Stores raster and overlay outputs from the models and scripts. These outputs are used in our web app visualizations. Migration to cloud storage is planned for this directory as well.  
 
 ### images:  
 Images used on our Streamlit app.  

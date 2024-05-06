@@ -31,10 +31,6 @@ stdf = st.session_state.df_tortise
 coords = stdf[['decimalLatitude', 'decimalLongitude']]
 coords_unique = coords.drop_duplicates()
 
-# Streamlit UI
-# species = st.text_input(
-#     "Scientific name of animal eg: Gopherus agassizii (Cooper, 1861)")
-
 # Initialize session state variables
 if 'previous_species' not in st.session_state:
     st.session_state.previous_species = ""
@@ -72,22 +68,20 @@ distr_xgb = load_raster_data("outputs/xgb-images/probability_1.tif")
 # Calculate the averaged distribution
 distr_averaged = (distr_rf + distr_et + distr_xgb) / 3
 
-# cola, colb = st.columns(2)
-# with cola:
-#     st.markdown("<h3 style='text-align: center;'>Desert Tortoise Predicted Range</h3>",
-#                 unsafe_allow_html=True)
-#     # Display the plot
-#     fig = plotit(distr_averaged, "", cmap="Greens")
-#     st.pyplot(fig, use_container_width=True)
-
-
 colormap = linear.YlGnBu_09.scale(0, distr_averaged.max())
 colormap.caption = 'Probability Distribution'
 
-# with colb:
 st.markdown("<h3 style='text-align: left;'>Desert Tortoise Predicted Range- Current</h3>",
             unsafe_allow_html=True)
 create_folium_map(colormap)
+
+# Map caption
+caption = """
+<small style='font-size: 12px;'>The area outlined in red represents your project site</small>    
+<small style='font-size: 12px;'>The color bar indicates the probability that a tortoise is found in that area.</small>   
+<small style='font-size: 12px;'>The resolution is 4.5km.</small>
+"""
+st.markdown(caption, unsafe_allow_html=True)
 
 text = """
 **SUMMARY**  
@@ -141,7 +135,7 @@ coordinates = [
 # Create polygon and add it to the map
 folium.vector_layers.Polygon(
     locations=coordinates,  # List of coordinates
-    color='blue'          # Color of the polygon's border
+    color='red'          # Color of the polygon's border
 ).add_to(m)
 
 
@@ -149,6 +143,13 @@ folium.vector_layers.Polygon(
 colormap.add_to(m)
 
 st_folium(m, width=725, height=500)
+
+caption = """
+<small style='font-size: 12px;'>The area outlined in red represents your project site</small>    
+<small style='font-size: 12px;'>The color bar indicates the probability that a tortoise is found in that area.</small>   
+<small style='font-size: 12px;'>The resolution is 4.5km.</small>
+"""
+st.markdown(caption, unsafe_allow_html=True)
 
 text2 = """
 **SUMMARY**  

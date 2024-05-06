@@ -78,8 +78,18 @@ def add_geojson_layer(map_obj, company):
         ]
     }
 
+    # Define a function to apply style
+    def style_function(feature):
+        return {
+            'color': 'red',  # Outline color
+            'fillColor': 'none',
+            'fillOpacity': 0,
+            'weight': 3,
+        }
+
     # Add the GeoJSON to the map
-    folium.GeoJson(geojson, name=f"{company} Area").add_to(map_obj)
+    folium.GeoJson(geojson, name=f"{company} Area",
+                   style_function=style_function).add_to(map_obj)
 
 # Initialize map
 
@@ -98,7 +108,7 @@ def load_data():
 st.title("Explore corporate sustainability + biodiversity impacts")
 text = """
 The growth of corporate sustainability has the potential to help reverse species loss.  
-But how can we assess corporate commitments and their actual impact on biodiversity conservation?  
+How can we assess corporate commitments and their actual impact on biodiversity conservation?  
 We hope that providing this information on companies with sustainability initiatives will better inform  
 consumers and help people support businesses with a visible positive impact. 
 
@@ -180,14 +190,14 @@ if bird_selection == "Bird 1 - Blue-headed Wood-Dove":
         **Total Number of Endangered Species:** {endangered_species_count}
         """, unsafe_allow_html=True)
 
-    st.title("Forcasted Predicted Range")
+    st.title("Forecasted Predicted Range")
 
     # Selection for layers using radio buttons
-    layer_options = ['None', 'Endangered Species', 'Company Commitment']
+    layer_options = ['None', 'Endangered Species Distribution', 'Company Commitment Area']
 
     selected_company = st.selectbox("Select a Company:", companies)
     selected_option = st.radio(
-        'Select a map layer to display:', layer_options)
+        'First select Endangered Species Distribution to view forecast. Then select Company Commitment Area to view the area of company investment.', layer_options)
     generated_predicted = st.checkbox("Run Predicted Range - 2050")
 
     col1, col2 = st.columns(2)
@@ -200,64 +210,105 @@ if bird_selection == "Bird 1 - Blue-headed Wood-Dove":
             m = create_map()
 
             # Logic to display layers based on the radio button selection
-            if selected_option == 'Endangered Species':
+            if selected_option == 'Endangered Species Distribution':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
-            elif selected_option == 'Company Commitment':
+                distr_rf = load_raster_data("outputs/rf-images_bird/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
+            elif selected_option == 'Company Commitment Area':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
                 add_geojson_layer(m, company=selected_company)
+                distr_rf = load_raster_data("outputs/rf-images_bird/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
 
             # Render the map
             st_folium(m, width=725, height=500, key=selected_company)
+            caption = """
+            <small style='font-size: 12px;'>The area outlined in red represents a project site. (Click Company Commitment Area button to view this.)</small>    
+            <small style='font-size: 12px;'>The color bar indicates the probability that the selected species is found in that area.</small>   
+            <small style='font-size: 12px;'>The resolution is 4.5km.</small>
+            """
+            st.markdown(caption, unsafe_allow_html=True)
 
         if selected_company == "Unilever":
             # Assume unique_species is already defined and loaded with data
             m = create_map()
 
             # Logic to display layers based on the radio button selection
-            if selected_option == 'Endangered Species':
+            if selected_option == 'Endangered Species Distribution':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
-            elif selected_option == 'Company Commitment':
+                distr_rf = load_raster_data("outputs/rf-images_bird/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
+            elif selected_option == 'Company Commitment Area':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
                 add_geojson_layer(m, company=selected_company)
-
+                distr_rf = load_raster_data("outputs/rf-images_bird/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
+                
             # Render the map
             st_folium(m, width=725, height=500, key=selected_company)
+            
+            caption = """
+            <small style='font-size: 12px;'>The area outlined in red represents a project site. (Click Company Commitment Area button to view this.)</small>    
+            <small style='font-size: 12px;'>The color bar indicates the probability that the selected species is found in that area.</small>   
+            <small style='font-size: 12px;'>The resolution is 4.5km.</small>
+            """
+            st.markdown(caption, unsafe_allow_html=True)
 
         if selected_company == "Nike":
             # Assume unique_species is already defined and loaded with data
             m = create_map()
 
             # Logic to display layers based on the radio button selection
-            if selected_option == 'Endangered Species':
+            if selected_option == 'Endangered Species Distribution':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
-            elif selected_option == 'Company Commitment':
+            elif selected_option == 'Company Commitment Area':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
                 add_geojson_layer(m, company=selected_company)
 
             # Render the map
             st_folium(m, width=725, height=500, key=selected_company)
+            caption = """
+            <small style='font-size: 12px;'>The area outlined in red represents a project site. (Click Company Commitment Area button to view this.)</small>    
+            <small style='font-size: 12px;'>The color bar indicates the probability that the selected species is found in that area.</small>   
+            <small style='font-size: 12px;'>The resolution is 4.5km.</small>
+            """
+            st.markdown(caption, unsafe_allow_html=True)
 
         if selected_company == "IKEA":
             # Assume unique_species is already defined and loaded with data
             m = create_map()
 
             # Logic to display layers based on the radio button selection
-            if selected_option == 'Endangered Species':
+            if selected_option == 'Endangered Species Distribution':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
-            elif selected_option == 'Company Commitment':
+            elif selected_option == 'Company Commitment Area':
                 add_raster_layer(m, rasterio_file="outputs/rf-images_bird/probability_1.0.tif",
                                  image_path='outputs/distr_averaged_bird.png')
                 add_geojson_layer(m, company=selected_company)
 
             # Render the map
             st_folium(m, width=725, height=500, key=selected_company)
+            caption = """
+            <small style='font-size: 12px;'>The area outlined in red represents a project site. (Click Company Commitment Area button to view this.)</small>    
+            <small style='font-size: 12px;'>The color bar indicates the probability that the selected species is found in that area.</small>   
+            <small style='font-size: 12px;'>The resolution is 4.5km.</small>
+            """
+            st.markdown(caption, unsafe_allow_html=True)
 
     with col2:
 
@@ -277,13 +328,27 @@ if bird_selection == "Bird 1 - Blue-headed Wood-Dove":
             m = create_map()
 
             # Logic to display layers based on the radio button selection
-            if selected_option == 'Endangered Species':
+            if selected_option == 'Endangered Species Distribution':
                 add_raster_layer(m, rasterio_file=rasterio_2050,
                                  image_path=image_path_2050)
-            elif selected_option == 'Company Commitment':
+                distr_rf = load_raster_data("outputs/rf-images_bird_2050/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
+            elif selected_option == 'Company Commitment Area':
                 add_raster_layer(m, rasterio_file=rasterio_2050,
                                  image_path=image_path_2050)
                 add_geojson_layer(m, company=selected_company)
+                distr_rf = load_raster_data("outputs/rf-images_bird_2050/probability_1.0.tif")
+                colormap = linear.YlGnBu_09.scale(0, distr_rf.max())
+                colormap.caption = 'Probability Distribution'
+                colormap.add_to(m)
 
             # Render the map
             st_folium(m, width=725, height=500, key="IKEA_2050")
+            caption = """
+            <small style='font-size: 12px;'>The area outlined in red represents a project site. (Click Company Commitment Area button to view this.)</small>    
+            <small style='font-size: 12px;'>The color bar indicates the probability that the selected species is found in that area.</small>   
+            <small style='font-size: 12px;'>The resolution is 4.5km.</small>
+            """
+            st.markdown(caption, unsafe_allow_html=True)

@@ -352,7 +352,7 @@ def create_folium_map(colormap):
     # Create polygon and add it to the map
     folium.vector_layers.Polygon(
         locations=coordinates,  # List of coordinates
-        color='blue'          # Color of the polygon's border
+        color='red'          # Color of the polygon's border
     ).add_to(m)
 
     return st_folium(m, width=725, height=500)

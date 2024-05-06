@@ -31,14 +31,14 @@ st.markdown("<h3 style='text-align: left; color: green;'>Become a leader in adva
             unsafe_allow_html=True)
 
 
-col1, col2 = st.columns([2])
+col1, col2 = st.columns(2)
 
 with col1:
     demo1 = st.button("Request a Consultation", key="demo1")
     if demo1:
         switch_page("request consult")
 
-with col1:
+with col2:
     demo2 = st.button("Explore our Data", key="demo2")
     if demo2:
         switch_page("for consumers")
